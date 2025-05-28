@@ -1,0 +1,20 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "nombre": "Martillo",
+      "descripcion": "Martillo de acero",
+      "categoria": "Herramientas",
+      "precio": 4990,
+      "stock": 12
+    },
+    {
+      "id": 2,
+      "nombre": "Destornillador",
+      "descripcion": "Destornillador estrella",
+      "categoria": "Herramientas",
+      "precio": 2990,
+      "stock": 25
+    }
+  ]
+}

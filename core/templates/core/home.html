@@ -1,0 +1,34 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+    <script>
+    async function addToCart(id, nombre, precio) {
+        const cantidad = 1;
+        const res = await fetch("/api/cart/add/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": "{{ csrf_token }}",
+            },
+            body: JSON.stringify({ product_id: id, nombre, precio, cantidad }),
+        });
+
+        const data = await res.json();
+        alert(data.message);
+    }
+    </script>
+
+    {% for producto in products %}
+    <div>
+        <h3>{{ producto.nombre }}</h3>
+        <p>{{ producto.descripcion }}</p>
+        <p>Precio: ${{ producto.precio }}</p>
+        <p>Stock: {{ producto.stock }}</p>
+        {% if user.is_authenticated %}
+        <button onclick="addToCart('{{ producto.id }}', '{{ producto.nombre }}', '{{ producto.precio }}' )">
+            Agregar al carrito
+        </button>
+        {% endif %}
+    </div>
+    {% endfor %}
+{% endblock %}
