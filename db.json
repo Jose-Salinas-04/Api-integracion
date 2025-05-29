@@ -2,19 +2,67 @@
   "products": [
     {
       "id": 1,
-      "nombre": "Martillo",
-      "descripcion": "Martillo de acero",
-      "categoria": "Herramientas",
+      "nombre": "Martillo de Acero",
+      "descripcion": "Martillo profesional con mango de fibra de vidrio y cabeza de acero forjado",
+      "categoria": "Herramientas Manuales",
       "precio": 4990,
       "stock": 12
     },
     {
       "id": 2,
-      "nombre": "Destornillador",
-      "descripcion": "Destornillador estrella",
-      "categoria": "Herramientas",
+      "nombre": "Destornillador Phillips",
+      "descripcion": "Juego de destornilladores Phillips con mangos ergonómicos antideslizantes",
+      "categoria": "Herramientas Manuales",
       "precio": 2990,
       "stock": 25
+    },
+    {
+      "id": 3,
+      "nombre": "Taladro Percutor 650W",
+      "descripcion": "Taladro percutor con potencia de 650W, incluye maletín y accesorios",
+      "categoria": "Herramientas Eléctricas",
+      "precio": 24990,
+      "stock": 8
+    },
+    {
+      "id": 4,
+      "nombre": "Sierra Circular 1200W",
+      "descripcion": "Sierra circular profesional con láser guía y ajuste de profundidad",
+      "categoria": "Herramientas Eléctricas",
+      "precio": 35990,
+      "stock": 5
+    },
+    {
+      "id": 5,
+      "nombre": "Pintura Blanca Mate 4L",
+      "descripcion": "Pintura acrílica de alto tráfico, acabado mate, cubre 14m² por litro",
+      "categoria": "Pinturas",
+      "precio": 15990,
+      "stock": 15
+    },
+    {
+      "id": 6,
+      "nombre": "Cemento RapidMix 25kg",
+      "descripcion": "Cemento de fraguado rápido, ideal para trabajos de reparación",
+      "categoria": "Materiales de Construcción",
+      "precio": 8990,
+      "stock": 30
+    },
+    {
+      "id": 7,
+      "nombre": "Llave Ajustable 10''",
+      "descripcion": "Llave ajustable de acero cromo vanadio con diseño ergonómico",
+      "categoria": "Herramientas Manuales",
+      "precio": 12990,
+      "stock": 0
+    },
+    {
+      "id": 8,
+      "nombre": "Escalera Telescópica 3.5m",
+      "descripcion": "Escalera aluminio 3.5m, peso máximo 150kg, sistema de bloqueo seguro",
+      "categoria": "Accesorios",
+      "precio": 42990,
+      "stock": 4
     }
   ]
 }

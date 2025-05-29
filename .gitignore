@@ -1,0 +1,49 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+*.sqlite3
+db.sqlite3
+
+# Media and static files (si usas carpetas medias o static locales)
+media/
+staticfiles/
+
+# Environments
+env/
+venv/
+.venv/
+# Pipenv virtual env
+.pipenv/
+
+# If usas pipenv virtualenv con nombre personalizado (el que mencionaste)
+.Api-integracion-wFRgRly0/
+
+# VSCode (si usas Visual Studio Code)
+.vscode/
+
+# PyCharm
+.idea/
+
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Logs
+*.log
+
+# json-server specific (si quieres ignorar archivos generados por json-server)
+db.json  # Si no quieres subir la base de datos local
+
+# Otros archivos temporales
+*.swp
+*.swo
