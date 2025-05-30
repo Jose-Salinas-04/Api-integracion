@@ -1,39 +1,69 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
-    <script>
-    async function addToCart(id, nombre, precio) {
-        const cantidad = 1;
+<div class="container">
+    <h2>Nuestros Productos</h2>
+    
+    <div class="product-grid">
+        {% for producto in products %}
+        <div class="product-card">
+            <div class="product-image">
+                <!-- Imagen del producto (puedes reemplazar con una imagen real) -->
+                <span>{{ producto.nombre|slice:":1" }}</span>
+            </div>
+            <div class="product-content">
+                <h3 class="product-title">{{ producto.nombre }}</h3>
+                <p class="product-description">{{ producto.descripcion }}</p>
+                <p class="product-price">${{ producto.precio|floatformat:"0" }}</p>
+                <p class="product-stock {% if producto.stock > 0 %}in-stock{% else %}out-of-stock{% endif %}">
+                    {% if producto.stock > 0 %}
+                        Disponible ({{ producto.stock }} en stock)
+                    {% else %}
+                        Agotado
+                    {% endif %}
+                </p>
+                {% if user.is_authenticated %}
+                <button onclick="addToCart('{{ producto.id }}', '{{ producto.nombre }}', '{{ producto.precio }}')" 
+                        class="btn" 
+                        {% if producto.stock <= 0 %}disabled{% endif %}>
+                    <i class="fas fa-cart-plus"></i> Agregar al carrito
+                </button>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+async function addToCart(id, nombre, precio) {
+    const cantidad = 1;
+    try {
         const res = await fetch("/api/cart/add/", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "X-CSRFToken": "{{ csrf_token }}"
-        },
-        body: JSON.stringify({
-            product_id: id,
-            nombre,
-            precio,
-            cantidad
-        })
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": "{{ csrf_token }}",
+            },
+            body: JSON.stringify({ product_id: id, nombre, precio, cantidad }),
         });
 
         const data = await res.json();
-        alert(data.message || data.error);
+        
+        // Mostrar notificación bonita en lugar de alert
+        const notification = document.createElement('div');
+        notification.className = `alert alert-${data.success ? 'success' : 'error'}`;
+        notification.textContent = data.message;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.style.opacity = '0';
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+        
+    } catch (error) {
+        console.error('Error:', error);
     }
-    </script>
-
-    {% for producto in products %}
-    <div>
-        <h3>{{ producto.nombre }}</h3>
-        <p>{{ producto.descripcion }}</p>
-        <p>Precio: ${{ producto.precio }}</p>
-        <p>Stock: {{ producto.stock }}</p>
-        {% if user.is_authenticated %}
-        <button onclick="addToCart('{{ producto.id }}', '{{ producto.nombre }}', '{{ producto.precio }}' )">
-            Agregar al carrito
-        </button>
-        {% endif %}
-    </div>
-    {% endfor %}
+}
+</script>
 {% endblock %}
