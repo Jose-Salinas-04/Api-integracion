@@ -1,0 +1,55 @@
+{% extends 'core/base.html' %}
+{% block content %}
+
+<h2>Tu carrito</h2>
+
+{% if items %}
+  <ul>
+    {% for item in items %}
+      <li>
+        {{ item.nombre }} - ${{ item.precio }} x {{ item.cantidad }} = ${{ item.subtotal }}
+        <button onclick="actualizarCantidad('{{ item.producto_id }}', 'sumar')">+</button>
+        <button onclick="actualizarCantidad('{{ item.producto_id }}', 'restar')">-</button>
+      </li>
+    {% endfor %}
+  </ul>
+  <p><strong>Total:</strong> ${{ total }}</p>
+  <button onclick="simularPago()">Simular pago</button>
+{% else %}
+  <p>Tu carrito está vacío.</p>
+{% endif %}
+
+<a href="{% url 'home' %}">Volver a productos</a>
+
+<script>
+  async function actualizarCantidad(producto_id, accion) {
+    const res = await fetch('/api/cart/update/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': '{{ csrf_token }}'
+      },
+      body: JSON.stringify({ producto_id, accion })
+    });
+    const data = await res.json();
+    alert(data.message);
+    location.reload();
+  }
+
+  async function simularPago() {
+    const confirmar = confirm("¿Deseas simular el pago?");
+    if (!confirmar) return;
+
+    const res = await fetch('/api/cart/pagar/', {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': '{{ csrf_token }}'
+      }
+    });
+    const data = await res.json();
+    alert(data.message);
+    location.reload();
+  }
+</script>
+
+{% endblock %}

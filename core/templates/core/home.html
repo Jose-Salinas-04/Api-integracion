@@ -5,16 +5,21 @@
     async function addToCart(id, nombre, precio) {
         const cantidad = 1;
         const res = await fetch("/api/cart/add/", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRFToken": "{{ csrf_token }}",
-            },
-            body: JSON.stringify({ product_id: id, nombre, precio, cantidad }),
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": "{{ csrf_token }}"
+        },
+        body: JSON.stringify({
+            product_id: id,
+            nombre,
+            precio,
+            cantidad
+        })
         });
 
         const data = await res.json();
-        alert(data.message);
+        alert(data.message || data.error);
     }
     </script>
 

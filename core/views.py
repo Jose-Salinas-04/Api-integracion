@@ -1,7 +1,18 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.decorators import login_required
+from carrito.models import CarritoItem
 import requests
+
+
+
+@login_required
+def ver_carrito(request):
+    items = CarritoItem.objects.filter(usuario=request.user)
+    total = sum(item.subtotal() for item in items)
+    return render(request, 'core/carrito.html', {'items': items, 'total': total})
+
 
 def register(request):
     if request.method == 'POST':
